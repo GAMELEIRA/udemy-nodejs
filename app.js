@@ -5,6 +5,8 @@
  * FINALIDADE DO MODULO: SIMULAR UMA CALCULADORA
  */
 
+const http = require('http');
+
 const calculadora = require('./calculadora.js');
 
 let imprimirResultado = (a, b, operacao) => {
@@ -47,12 +49,20 @@ let chamarOperacao = (a, b, operacao) => {
 
 };
 
-chamarOperacao(1, 2, 'soma');
+http.createServer((requisicao, resposta) => {
 
-chamarOperacao(1, 2, 'soma');
+    resposta.end(
 
-chamarOperacao(1, 2, 'multiplicacao');
+        'Bem vindo!',
 
-chamarOperacao(1, 2, 'divisao');
+        chamarOperacao(1, 2, 'soma'),
 
-chamarOperacao(1, 2, 'subtracao');
+        chamarOperacao(1, 2, 'soma'),
+
+        chamarOperacao(1, 2, 'multiplicacao'),
+
+        chamarOperacao(1, 2, 'divisao'),
+
+        chamarOperacao(1, 2, 'subtracao'));
+
+}).listen(4567);
